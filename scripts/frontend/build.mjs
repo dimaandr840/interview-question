@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { fullReport, categories, profession } from "./lib.mjs";
+import { fullReport, categories } from "./lib.mjs";
+import { profession } from "./manifest.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const OUT = path.join(ROOT, "questions", `${profession.slug}.js`);

@@ -40,7 +40,8 @@ function validateStrings(strings, where, errors) {
   const joined = strings.join("");
   const { bad } = checkInlineTags(joined);
   if (bad.length) errors.push(`${where}: недопустимые теги <${[...new Set(bad)].join(">, <")}>`);
-  if (/[*_`#]|\]\(/.test(joined.replace(/<[^>]+>/g, ""))) errors.push(`${where}: похоже на Markdown`);
+  const plain = joined.replace(/<[^>]+>/g, "");
+  if (/\*\*|`|\]\(|^#{1,6}\s/m.test(plain)) errors.push(`${where}: похоже на Markdown`);
   if (/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(joined)) errors.push(`${where}: эмодзи в тексте`);
 }
 
